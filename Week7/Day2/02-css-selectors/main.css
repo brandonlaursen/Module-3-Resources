@@ -22,7 +22,7 @@ pre{
 }
 
 a {
-    text-decoration: none;
+    text-decoration: underline rgb(100, 237, 159)e;
 }
 
 a:hover {
