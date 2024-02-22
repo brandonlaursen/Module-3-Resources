@@ -12,7 +12,7 @@ it's responsive to different screen sizes.
 
 Clone the practice from the [starter].
 
-Once you're in VS Code, you can drag the __index.html__ file into your browser
+Once you've in VS Code, you can drag the __index.html__ file into your browser
 to view the webpage, or use the **File Explorer** to open it in your browser.
 The only file you will need to edit for this practice is __main.css__.
 
@@ -38,13 +38,12 @@ Screenshot of page in small screen (mobile) format:
 ![Trello on a small screen](https://appacademy-open-assets.s3-us-west-1.amazonaws.com/Module-Responsive-Design/flexbox/assets/trello-small-screen.png)
 
 All of the elements needed for the page are contained in the
-`index.html` file. You will have to link to `main.css`, where you'll add your
-styles (try adding a `background-color` to the `.header-nav__container` to see
-if the import was successful). The page also includes a CDN link to Font
-Awesome, a font that contains nice icons you can use for the header. To use an
-icon from Font Awesome, you just need to include an `i` element with the classes "fa«indicator»" and "fa-«icon name»". For example, to include the solid "home"
+`flexbox-project.html` file. In addition to linking to `flexbox-project.css`,
+where you'll add your styles, the page also includes a CDN link to Font Awesome,
+a font that contains nice icons you can use for the header. To use an icon from
+Font Awesome, you just need to include an `i` element with the classes
+"fa«indicator»" and "fa-«icon name»". For example, to include the solid "home"
 icon which looks like a house, you would add this HTML to your source code.
-
 
 ```html
 <i class="fas fa-home"></i>
@@ -86,14 +85,20 @@ is for that setting.
 
 
 Now, you'll need to use `display: flex` on the `header-nav__container` to put
-the three sections in the right place with space between them. (The trello logo in the center and
-the buttons to the left and right.)
+the three sections in the right place. You want all three elements to span the
+same widths in the nav bar.
 
-Then for all the `.header-nav__group`, you'll want to manipulate the margin and padding to get the
+Then, in the left `.header-nav__group`, use flexbox to layout each
+`.header-nav__link`. You'll want to manipulate the margin and padding to get the
 different elements spaced apart from one another.
 
-In the right `.header-nav__group`, the alert button should have a background color of
+In the middle `.header-nav__group`, center the Trello logo.
+
+In the right `.header-nav__group`, have the buttons align right with the same
+spacing between them as you set between the elements in the first
+`.header-nav__group`. The alert button should have a background color of
 "#CF513D".
+
 
 Once you have that, add a media query "breakpoint" to hide the search input
 field and the "Boards" text on screens with widths less than or equal to 730
@@ -243,7 +248,7 @@ Set the following properties to the indicated values for the `.boards__board`:
 
 | Property         | Value      |
 | ---------------- | ---------- |
-| Background color | hotpink    |
+| Background color | black      |
 | Border radius    | 3 pixels   |
 | Box sizing       | border box |
 | Font weight      | bold font  |
