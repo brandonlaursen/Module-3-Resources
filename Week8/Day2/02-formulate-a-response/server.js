@@ -32,10 +32,12 @@ const server = http.createServer((req, res) => {
     res.end(responseBody);
 
     return;
-  }
+  };
 
   if (req.method === "GET" && req.url("/dogs")) {
+
   }
+
 });
 
 const port = 5000;
