@@ -129,7 +129,8 @@ const server = http.createServer((req, res) => {
         const dog = dogs.find(dog => dog.dogId === Number(dogId));
         // Your code here
       }
-    }
+    };
+
 
     // No matching endpoint
     const htmlPage = fs.readFileSync("./views/error.html", 'utf-8');

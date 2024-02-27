@@ -25,6 +25,7 @@ let dog;
 const server = http.createServer((req, res) => {
   console.log(`${req.method} ${req.url}`);
 
+  
   if (req.method === "GET" && req.url.startsWith('/assets')) {
     const assetPath = req.url.split("/assets")[1];
     try {
