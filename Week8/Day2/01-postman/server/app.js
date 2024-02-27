@@ -182,7 +182,9 @@ app.post('/posts/:postId/comments', (req, res) => {
   if (!post) throw new NotFoundError('Post not found');
 
   const { text } = req.body;
-
+  console.log('===>',text);
+  if(!text) return res.redirect('/');
+  
   post.comments.push({ commentId: nextCommentId, text });
 
   nextCommentId++;
@@ -255,7 +257,7 @@ app.use("/assets", express.static("assets", {
 
 app.use((req, res) => {
   res.status(404);
-  
+
   const data = {
     title: "404 - Page Not Found"
   }
