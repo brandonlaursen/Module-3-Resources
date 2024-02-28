@@ -83,6 +83,7 @@ function function2() {
     .catch((value) => console.log(`reason:`, `${value} is not a number`));
 }
 
+// npm instal node-fetch@2
 const fetch = require("node-fetch");
 
 // ! callstack -> microtask q -> message q
