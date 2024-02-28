@@ -85,10 +85,11 @@ function function2() {
 
 const fetch = require("node-fetch");
 
+// ! callstack -> microtask q -> message q
 function function3(value) {
   // console.log("===>", value);
   return new Promise((res, rej) => {
-    const jokes = fetch(`https://official-joke-api.appspot.com/jokes/random`);
+    const jokes = fetch(`https://official-joke-api.appspot.com/jokes/${value}`);
 
     if (jokes) {
       res(jokes);
@@ -101,16 +102,33 @@ function function3(value) {
 
 // function3();
 
-function chainPromises() {
+/*
+
+   * Async/await is a syntactic sugar on top of promises. It provides a more concise way to write asynchronous code, making it easier to read and write. With Async/Await, you can write asynchronous code that looks similar to synchronous code, and it uses promises under the hood.
+
+  * async keyword is used to declare an asynchronous function
+  * await keyword is used to wait for a promise to be resolved before continuing with the execution of the function. The await keyword can only be used inside an async function.
+
+*/
+
+async function chainPromises() {
   // function1()
   //   .then(() => function2())
   //   .then((value) => function3(value))
   //   .then(() => console.log("done with promise chain"))
   //   .catch((e) => console.log('===>',e));
 
-  Promise.all([function1(), function2(), function3()])
-    .then(() => console.log("done with promise chain"))
-    .catch((e) => console.log(e))
+  // Promise.all([function3(), function1(), function2()])
+  //   .then(() => console.log("done with promise chain"))
+  //   .catch((e) => console.log(e))
+
+  try {
+    await function1();
+    let number = await function2();
+    await function3(number);
+  } catch(e) {
+    console.log('error: ', e);
+  }
 }
 
 chainPromises();
