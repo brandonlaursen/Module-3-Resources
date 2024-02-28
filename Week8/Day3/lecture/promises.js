@@ -59,5 +59,25 @@ function function1() {
 
 // function1();
 
+const fetch = require("node-fetch");
+
+function function2() {
+  return new Promise((res, rej) => {
+    const jokes = fetch("https://official-jokeapi.appspot.com/jokes/random");
+
+    if (jokes) {
+      res(jokes);
+    }
+  })
+    .then((data) => data.json())
+    .then((data) => console.log(data), (e) => console.log("ERROR:==>", e))
+    // .catch((e) => console.log("ERROR", e));
+}
+
+function2();
 
 
+function chainPromises() {
+
+
+}
