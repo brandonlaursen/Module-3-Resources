@@ -77,7 +77,6 @@ function function2() {
     // * the value passed to the resolve function will be represented by the parameter in the callback function
   })
     .then((value) => {
-
       console.log("resolved", 10 + value);
       return value;
     })
@@ -87,30 +86,31 @@ function function2() {
 const fetch = require("node-fetch");
 
 function function3(value) {
-
-  console.log('===>',value);
+  // console.log("===>", value);
   return new Promise((res, rej) => {
-    const jokes = fetch(`https://official-joke-api.appspot.com/jokes/${value}`);
+    const jokes = fetch(`https://official-joke-api.appspot.com/jokes/random`);
 
     if (jokes) {
       res(jokes);
     }
   })
     .then((data) => data.json())
-    .then(
-      (data) => console.log(data),
-    );
+    .then((data) => console.log(data));
   // .catch((e) => console.log("ERROR", e));
 }
 
 // function3();
 
 function chainPromises() {
-  function1()
-    .then(() => function2())
-    .then((value) => function3(value))
+  // function1()
+  //   .then(() => function2())
+  //   .then((value) => function3(value))
+  //   .then(() => console.log("done with promise chain"))
+  //   .catch((e) => console.log('===>',e));
+
+  Promise.all([function1(), function2(), function3()])
     .then(() => console.log("done with promise chain"))
-    .catch((e) => console.log('===>',e));
+    .catch((e) => console.log(e))
 }
 
 chainPromises();
