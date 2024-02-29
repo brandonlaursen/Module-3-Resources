@@ -287,7 +287,7 @@
       /my/tweets	POST	Submit create form: Create a new tweet
       /my/tweets/17	GET	Detail page: See the details of your tweet with the id of 17
       /my/tweets/17/edit	GET	Edit form page: Show the edit form for your tweet with the id of 17
-      /my/tweets/17	POST	Submit edit form: Update the tweet with the submitted details
+      /my/tweets/17/edit	Submit edit form: Update the tweet with the submitted details
       /my/tweets/17/delete	POST	Submit delete form: Delete your tweet with the id of 17
 
 
