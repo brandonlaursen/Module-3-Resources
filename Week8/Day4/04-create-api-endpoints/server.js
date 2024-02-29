@@ -51,46 +51,99 @@ const server = http.createServer((req, res) => {
 
     /* ======================== ROUTE HANDLERS ======================== */
 
-    // GET /dogs
+    // * GET /dogs
     if (req.method === 'GET' && req.url === '/dogs') {
       // Your code here
 
-      return res.end();
+        /*
+          set status code
+          set headers
+          return json and end the response
+        */
+
+          res.statusCode = 200;
+          res.setHeader('Content-Type', 'application/json');
+
+
+      // res.write(JSON.stringify(dogs));
+      return res.end(JSON.stringify(dogs));
     }
 
-    // GET /dogs/:dogId
+    // * GET /dogs/:dogId
     if (req.method === 'GET' && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/'); // ['', 'dogs', '1']
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
-      }
-      return res.end();
+
+        const foundDog = dogs.find(dog => +dogId === dog.dogId);
+        // console.log(foundDog);
+
+        res.statusCode = 200;
+        res.setHeader("Content-Type", 'application/json');
+        return res.end(JSON.stringify(foundDog));
+      };
     }
 
-    // POST /dogs
+    // * POST /dogs
+
+    // fetch('/dogs',
+    //   {
+    // method: "POST",
+    // headers: {
+    // "Content-Type": "application/json"
+    //     },
+    // body: JSON.stringify({
+    //  name: 'Big bear',
+    //  age: 25
+    // })
+
+    //   }
+    //  ).then(() => fetch('/dogs')).then(data => data.json()).then(data => console.log(data))
+
     if (req.method === 'POST' && req.url === '/dogs') {
       const { name, age } = req.body;
-      // Your code here
-      return res.end();
+
+
+      const newDog = {
+        dogId: getNewDogId(),
+        name,
+        age
+      }
+
+
+      dogs.push(newDog);
+
+      res.statusCode = 201;
+      res.setHeader('Content-Type', 'application/json');
+
+      return res.end(JSON.stringify(newDog));
     }
 
-    // PUT or PATCH /dogs/:dogId
+    // * PUT or PATCH /dogs/:dogId
     if ((req.method === 'PUT' || req.method === 'PATCH')  && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/');
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
+
+
+
+
       }
       return res.end();
     }
 
-    // DELETE /dogs/:dogId
+    // * DELETE /dogs/:dogId
     if (req.method === 'DELETE' && req.url.startsWith('/dogs/')) {
       const urlParts = req.url.split('/');
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
+
+
+
+
       }
       return res.end();
     }
