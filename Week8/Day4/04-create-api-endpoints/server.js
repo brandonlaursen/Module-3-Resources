@@ -1,11 +1,11 @@
-const http = require('http');
+const http = require("http");
 
 const dogs = [
   {
     dogId: 1,
     name: "Fluffy",
-    age: 2
-  }
+    age: 2,
+  },
 ];
 
 let nextDogId = 2;
@@ -25,10 +25,11 @@ const server = http.createServer((req, res) => {
     reqBody += data;
   });
 
-  req.on("end", () => { // request is finished assembly the entire request body
+  req.on("end", () => {
+    // request is finished assembly the entire request body
     // Parsing the body of the request depending on the Content-Type header
     if (reqBody) {
-      switch (req.headers['content-type']) {
+      switch (req.headers["content-type"]) {
         case "application/json":
           req.body = JSON.parse(reqBody);
           break;
@@ -52,37 +53,36 @@ const server = http.createServer((req, res) => {
     /* ======================== ROUTE HANDLERS ======================== */
 
     // * GET /dogs
-    if (req.method === 'GET' && req.url === '/dogs') {
+    if (req.method === "GET" && req.url === "/dogs") {
       // Your code here
 
-        /*
+      /*
           set status code
           set headers
           return json and end the response
         */
 
-          res.statusCode = 200;
-          res.setHeader('Content-Type', 'application/json');
-
+      res.statusCode = 200;
+      res.setHeader("Content-Type", "application/json");
 
       // res.write(JSON.stringify(dogs));
       return res.end(JSON.stringify(dogs));
     }
 
     // * GET /dogs/:dogId
-    if (req.method === 'GET' && req.url.startsWith('/dogs/')) {
-      const urlParts = req.url.split('/'); // ['', 'dogs', '1']
+    if (req.method === "GET" && req.url.startsWith("/dogs/")) {
+      const urlParts = req.url.split("/"); // ['', 'dogs', '1']
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
         // Your code here
 
-        const foundDog = dogs.find(dog => +dogId === dog.dogId);
+        const foundDog = dogs.find((dog) => +dogId === dog.dogId);
         // console.log(foundDog);
 
         res.statusCode = 200;
-        res.setHeader("Content-Type", 'application/json');
+        res.setHeader("Content-Type", "application/json");
         return res.end(JSON.stringify(foundDog));
-      };
+      }
     }
 
     // * POST /dogs
@@ -101,65 +101,80 @@ const server = http.createServer((req, res) => {
     //   }
     //  ).then(() => fetch('/dogs')).then(data => data.json()).then(data => console.log(data))
 
-    if (req.method === 'POST' && req.url === '/dogs') {
+    if (req.method === "POST" && req.url === "/dogs") {
       const { name, age } = req.body;
-
 
       const newDog = {
         dogId: getNewDogId(),
         name,
-        age
-      }
-
+        age,
+      };
 
       dogs.push(newDog);
 
       res.statusCode = 201;
-      res.setHeader('Content-Type', 'application/json');
+      res.setHeader("Content-Type", "application/json");
 
       return res.end(JSON.stringify(newDog));
     }
 
     // * PUT or PATCH /dogs/:dogId
-    if ((req.method === 'PUT' || req.method === 'PATCH')  && req.url.startsWith('/dogs/')) {
-      const urlParts = req.url.split('/');
+    if (
+      (req.method === "PUT" || req.method === "PATCH") &&
+      req.url.startsWith("/dogs/")
+    ) {
+      const urlParts = req.url.split("/");
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
-        // Your code here
 
+        const { name, age } = req.body;
 
+        // console.log('---->', dogId, name, age);
 
+        const foundDog = dogs.find((dog) => +dogId === dog.dogId);
 
+        foundDog.name = name;
+        foundDog.age = age;
+
+        res.statusCode = 200;
+        res.setHeader("Content-Type", "application/json");
+
+        return res.end(JSON.stringify(foundDog));
       }
-      return res.end();
     }
 
+    // const JSON = "application/json";
     // * DELETE /dogs/:dogId
-    if (req.method === 'DELETE' && req.url.startsWith('/dogs/')) {
-      const urlParts = req.url.split('/');
+    if (req.method === "DELETE" && req.url.startsWith("/dogs/")) {
+      const urlParts = req.url.split("/");
       if (urlParts.length === 3) {
         const dogId = urlParts[2];
-        // Your code here
 
+        const dogIndex = dogs.findIndex((dog) => dog.id == dogId);
+        console.log(dogs);
+        dogs.splice(dogIndex, 1);
+        nextDogId--;
 
+        res.statusCode = 200;
 
+        res.setHeader("Content-Type", "application/json");
 
+        console.log("DELETED", dogs, { deletedDogId: dogId });
+        return res.end(JSON.stringify({ message: "Successfully deleted" }));
       }
-      return res.end();
+      // return res.end();
     }
 
     // No matching endpoint
     res.statusCode = 404;
-    res.setHeader('Content-Type', 'application/json');
-    return res.end('Endpoint not found');
+    res.setHeader("Content-Type", "application/json");
+    return res.end("Endpoint not found");
   });
-
 });
 
-
 if (require.main === module) {
-    const port = 8000;
-    server.listen(port, () => console.log('Server is listening on port', port));
+  const port = 8000;
+  server.listen(port, () => console.log("Server is listening on port", port));
 } else {
-    module.exports = server;
+  module.exports = server;
 }
