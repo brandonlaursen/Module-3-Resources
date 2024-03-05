@@ -1,7 +1,13 @@
-class Game {
+
+import { getIndex } from "./utilities.js";
+import { mrPotatoHeadQuotes } from "./quotes/mrPotatoHead.js";
+import mrsPotatoHeadQuotes, { sayHi } from "./quotes/mrsPotatoHead.js";
+
+export class Game {
 
   start() {
 
+    sayHi();
     document.getElementById('hello').addEventListener('click', () => {
       const index = getIndex();
       const messageContainer = document.getElementById('message');
