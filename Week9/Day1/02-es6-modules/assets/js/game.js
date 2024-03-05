@@ -1,3 +1,10 @@
+//!!START SILENT
+import { getIndex } from './utilities.js';
+import { mrPotatoHeadQuotes } from './quotes/mrPotatoHead.js';
+import mrsPotatoHeadQuotes from './quotes/mrsPotatoHead.js';
+
+//!!END
+
 class Game {
 
   start() {
@@ -38,3 +45,7 @@ class Game {
     })
   }
 }
+
+//!!START SILENT
+export default Game;
+//!!END
