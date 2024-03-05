@@ -84,8 +84,7 @@ removeLast.addEventListener("click", () => {
     let lastDog = allDogs[allDogs.length - 1];
     // console.log(lastDog);
 
-    /*-------------------- Remove the last dog card ----------------------- */
-    // Your code here
+    
     if(lastDog) {
         lastDog.remove();
     } else {
