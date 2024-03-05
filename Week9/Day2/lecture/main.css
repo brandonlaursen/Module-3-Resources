@@ -1,0 +1,48 @@
+body{
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+}
+
+h1 {
+  color: red;
+  text-align: center;
+}
+
+
+ul > li {
+  background: #656565;
+  color: rgb(255, 255, 255);
+  list-style-type: none;
+  margin: 10px;
+  padding: 25px;
+  height: 50px;
+  width: auto;
+  text-align: center;
+
+}
+
+
+#button-div{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+}
+
+button {
+  background-color: #EA4C89;
+  border-radius: 8px;
+  border-style: none;
+  color: #FFFFFF;
+  cursor: pointer;
+  height: 40px;
+  width: 100px;
+  margin: 10px;
+  text-align: center;
+}
+
+button:hover,
+button:focus {
+  background-color: #F082AC;
+}
