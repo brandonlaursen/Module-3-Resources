@@ -1,0 +1,28 @@
+div{
+  background: #ff00bb;
+  border: 1px solid #ffffff;
+  border-radius: 6px;
+  color: #FFFFFF;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 40px;
+  padding: 120px 140px;
+  text-align: center;
+  font-size: 5rem;
+
+}
+
+/* CSS */
+
+#one{
+  background: #FF4742;
+}
+
+#two{
+  background: #42ff4b;
+}
+
+
+#three{
+  background: #4255ff;
+}

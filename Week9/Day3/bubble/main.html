@@ -1,0 +1,78 @@
+<!--
+
+ * The Bubbling Principle means that when an event happens on an element, it first runs the handlers on it, then on its parent, then all the way up on other ancestors.
+
+
+ * When we run an event on div with id of 3
+ * The event will propagate up to the parent 2 and fire its event
+ * Then the ancestor 1 and fire its event
+
+ ! The event bubbled up to parent elements
+ * starts from the most deeply nested element upwards
+ * Whenever you click an element on the page, the browser will bubble that event up through every ancestor of the element you clicked on.
+ ! event only happens if there is an event; if no event nothing happens as propagation happens
+
+ ! Once the event bubbles all the way back to the top, it actually turns around and goes all the way back down. This is called event capturing
+
+ How do we stop it?
+ *
+
+ <button onclick="myFunction()">Click me</button>
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="main.css" />
+
+    <script type="text/javascript">
+      window.addEventListener("DOMContentLoaded", (event) => {
+        document.querySelector("#three").addEventListener("click", (e) => {
+
+          console.log(e)
+          // console.log("three");
+          e.stopPropagation();
+          alert("three");
+        });
+
+        document.querySelector("#two").addEventListener("click", (e) => {
+          // console.log("two");
+          // e.stopPropagation();
+          alert("two");
+        });
+
+        document.querySelector("#one").addEventListener("click", (e) => {
+          // console.log("one");
+          // e.stopPropagation();
+          alert("one");
+        });
+      });
+    </script>
+  </head>
+  <body>
+    <div>
+
+      <div id="one">
+
+        1
+        <div id="two">
+          2
+          <div id="three">3</div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </body>
+</html>
+
+<!--
+    <div id="one" onclick="alert('one')">
+      1
+      <div id="two" onclick="alert('two')">
+        2
+        <div id="three" onclick="alert('three')">3</div>
+      </div>
+    </div>
+   -->
