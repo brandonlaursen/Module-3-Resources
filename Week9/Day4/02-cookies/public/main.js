@@ -1,18 +1,52 @@
 /* ============================== PHASE 1 + 2 ============================== */
 
+
+function getCookieValue (key) {
+    // console.log('====>',key)
+
+    const cookies = document.cookie
+    // console.log(cookies);// display-name=brandon; theme=dragon
+
+    const splitCookies = cookies.split('; ');
+    // console.log(splitCookies);
+
+    const value = splitCookies.find(cookie => cookie.startsWith(key));
+    // console.log(value);
+
+    const result = value.split('=')[1];
+    // console.log(result);
+    return result;
+
+}
+
+
 // For storing user's theme selection in cookies
 function storeTheme(themeName) {
     // Your code here
+
+    document.cookie = `theme=${themeName};`;
 }
 
 // For restoring theme from cookies, if selected by the user in the past
 function restoreTheme() {
     // Your code here
+
+    // const cookie = document.cookie;
+    // console.log('===>',cookie);
+    let theme = getCookieValue('theme');
+    // const theme = cookie.split('=')[1];
+    // console.log(theme, 'theme');
+
+    // console.log(theme);
+    if(theme) {
+        setTheme(theme);
+    }
 }
 
 // For clearing theme selection from cookies (reset to default)
 function clearTheme() {
     // Your code here
+    document.cookie = `theme=; max-age=0`
 }
 
 /* ================================ PHASE 3 ================================ */
@@ -20,16 +54,24 @@ function clearTheme() {
 // For storing user's display name in cookies
 function storeName(displayName) {
     // Your code here
+    document.cookie = `display-name=${displayName};`;
 }
 
 // For restoring user's display name from cookies, if set in the past
 function restoreName() {
     // Your code here
+    let name = getCookieValue('display-name');
+
+    if(name) {
+        setInputValue('display-name', name);
+    }
+
 }
 
 // For clearing user's display name from cookies
 function clearName() {
     // Your code here
+    document.cookie = `name=; max-age=0`
 }
 
 /* ========================================================================= */
