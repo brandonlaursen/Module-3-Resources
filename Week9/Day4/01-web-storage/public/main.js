@@ -1,19 +1,34 @@
 /* ================================ PHASE 1 ================================ */
 
+
+
 // For storing user's theme selection in the browser
 function storeTheme(themeName) {
     // Your code here
+
+    window.localStorage.setItem('theme', themeName);
+
 }
 
 // For restoring theme, if selected by the user in the past
 function restoreTheme() {
     // Your code here
+
+    const theme = window.localStorage.getItem('theme');
+    // console.log(theme);
+
+    if(theme) {
+    setTheme(theme);
+    }
 }
 
 // For clearing theme selection from the browser's storage (reset to default)
 
 function clearTheme() {
     // Your code here
+
+    localStorage.removeItem('theme');
+
 }
 
 /* ================================ PHASE 2 ================================ */
@@ -21,16 +36,23 @@ function clearTheme() {
 // For storing user's display name
 function storeName(displayName) {
     // Your code here
+    sessionStorage.setItem('display-name', displayName);
+
 }
 
 // For restoring user's display name, if set in the past
 function restoreName() {
     // Your code here
+    const name = sessionStorage.getItem('display-name');
+
+    setInputValue('display-name', name);
 }
 
 // For clearing user's display name from browser storage
 function clearName() {
     // Your code here
+
+    sessionStorage.removeItem('display-name');
 }
 
 /* ========================================================================= */
